@@ -1,70 +1,59 @@
 //Creo el contexto
 import { createContext, useEffect, useState } from "react";
-import { isCompositeComponent } from "react-dom/test-utils";
 
-//lo exporto para saber de cual proviene
+
+
 export const CartContext = createContext();
 
-//Se crea como capa de abstraccion y se llaman a los children
-// para poder visualizar la pantalla los componantes.
-const Provider = (props)=>{
+const Provider = (props) => {
     const [cart, setCart] = useState([])
-    const [suma,setSuma] = useState([0])
+    const [suma, setSuma] = useState(0)
 
-
-    const totalCart = () =>
-    {
-        let suma = 0;
-
-        cart.forEach(item => suma += (item.precio * item.stock))
+    const totalCart = () => {
+        let  suma = 0
+        cart.forEach(item => suma += (item.precio * item.stock));
         setSuma(suma)
-    
     }
 
-
-    //Escucha los cambios del carrito si suma o no
-    useEffect(()=>{
+    useEffect(() => {
         console.log(cart)
         totalCart()
-    },[cart])
+    }, [cart])
 
-
-    const addToCart = (item,cantidad) =>
-    {   //utilizo spread operator para agregar todo "junto"
-        // console.log({...item,cantidad}
-        // console.log('agregando al carrito')
-        
-        if(isInCart(item.id))
-        {
-            alert('Ya esta en el carrito')
-        }
-        else{  setCart([...cart,{...item,cantidad}])}
-      
-    }
-
-    //funcion que busca si el item esta en el carrito
-    ////saber si esta o no, devuelve un true or false la funcion
-    const isInCart = (id) =>
-    {
+    const addToCart = (item, cantidad) => {
+        if (isInCart(item.id)) {
+            // alert('Ya está en el carrito');
+            cart.map(product => {
+                if(product.id === item.id){
+                    product.cantidad = cantidad
+                    console.log('cart', cart)
+                    setCart(cart)
+                }
+            })
             
-      return cart.some((prod) => prod.id === id)
+        } else {
+            setCart([...cart, { ...item, cantidad }]);
+        }
     }
 
-    //Funcion que trae los articulos distintos al 
-    const deleteOne = (id) =>
-    {
-        const articulos = cart.filter((prod)=> prod.id !== id);
-        setCart(articulos);
+    const isInCart = (id) => {
+        return cart.some((item) => item.id === id);
+    };
+
+    const deleteOne = (id) => {
+        const productosFiltrados = cart.filter((prod) => prod.id !== id);
+        setCart(productosFiltrados);
     }
-    const deleteAll = () =>
-    {
+
+    const deleteAll = () => {
         setCart([])
     }
 
-   return(
-     <CartContext.Provider value={{cart,addToCart,deleteOne,deleteAll}}>
-        {props.children}
-     </CartContext.Provider>
+    return (
+         <CartContext.Provider value={{ cart, addToCart, deleteAll, deleteOne, suma }}>
+            {props.children}
+        </CartContext.Provider>
     )
 }
-export default Provider;
+
+export default Provider

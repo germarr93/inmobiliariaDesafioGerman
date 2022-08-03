@@ -13,10 +13,10 @@ function App () {
        <BrowserRouter>  
       <Navbar />
       <Routes>
-      <Route path="/" element={<ItemListContainer />}/> 
-      <Route path="/categorias/:categoria" element={<ItemListContainer />}/>
-      <Route path="/item/:id" element={<ItemDetailContainer/>} /> 
-      <Route path="/cart" element={<Cart/>}/>
+            <Route path="/" element={<ItemListContainer />}/> 
+            <Route path="/categorias/:categoria" element={<ItemListContainer />}/>
+            <Route path="/item/:id" element={<ItemDetailContainer/>} /> 
+            <Route path="/cart" element={<Cart/>}/>
       </Routes>
       </BrowserRouter>
       </Provider>

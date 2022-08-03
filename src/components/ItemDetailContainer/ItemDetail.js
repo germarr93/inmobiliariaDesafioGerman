@@ -11,9 +11,9 @@ const ItemDetail = ({item}) => {
  
 
    const onAdd = (cantidad) => {
-    // console.log("seleccionaste ", cantidad, " items")
+   
     setCantidad(cantidad);
-    addToCart(item,cantidad); //le paso el detalle y cantida 
+    addToCart(item,cantidad); 
   }
 
 
@@ -27,16 +27,15 @@ const ItemDetail = ({item}) => {
         <div className="titulo-container">
             <h1>{nombre}</h1>
             {extra && <span>{extra}</span>}
-            {/* <div><h2>{prueba}</h2></div> */}
+            {}
             <h3 style={{color: "whitesmoke"}}>${precio}</h3>
         </div>
-        
-        <p>
-          {descripcion}
-        </p>
+        <p> {descripcion}</p>
         {cantidad === 0 ? ( 
           <ItemCount stock={stock} precio={precio} onAdd={onAdd}/>
          ) : ( <NavLink to="/cart">Ir al carrito</NavLink> )}
+         <br/>
+         <NavLink to="/">Seguir comprando</NavLink>
         </div>
     </div>
   );
