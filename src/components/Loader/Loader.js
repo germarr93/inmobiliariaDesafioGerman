@@ -7,7 +7,7 @@ const Loader = () => {
       {/* <div className="lds-heart">
         <div />
       </div> */}
-      <div class="loader">Loading...</div>
+      <div class="loader">Cargando...</div>
     </div>
   );
 };

@@ -32,7 +32,6 @@ const ItemListContainer = () => {
           console.log(error)
         })},[categoria]);
 
-//se define para cuando haya solo un cambio para esa variable.
 return (
   <div
       style={{
@@ -40,12 +39,7 @@ return (
           justifyContent: 'center',
       }}
   >
-      {/* <h2
-          className={loading ? 'grande' : 'chico'}
-          style={{ color: loading ? 'red' : 'blue' }}
-      >
-          {saludo}
-      </h2> */}
+    
       {loading ? (
           <h1>Cargando productos...</h1>
       ) : (
