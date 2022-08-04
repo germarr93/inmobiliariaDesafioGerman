@@ -31,11 +31,13 @@ const ItemDetail = ({item}) => {
             <h3 style={{color: "whitesmoke"}}>${precio}</h3>
         </div>
         <p> {descripcion}</p>
+        <h3>Selecciona la cantidad</h3>
         {cantidad === 0 ? ( 
           <ItemCount stock={stock} precio={precio} onAdd={onAdd}/>
-         ) : ( <NavLink to="/cart">Ir al carrito</NavLink> )}
-         <br/>
-         <NavLink to="/">Seguir comprando</NavLink>
+         ) : ( <NavLink to="/cart">Ir al carrito</NavLink>
+          )} <NavLink to="/"><button>Seguir comprando</button></NavLink>
+
+      
         </div>
     </div>
   );

@@ -10,7 +10,7 @@ const Cart = () => {
     if (cart.length === 0) {
         return (
             <h2>
-                No hay seleccionada ningun apartamento o Casa. <Link to="/">Inicio</Link>
+                No se encuentra nada seleccionado <Link to="/">Volver al inicio</Link>
             </h2>
         )
     }
