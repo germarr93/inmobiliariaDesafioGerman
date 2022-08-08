@@ -2,6 +2,8 @@ import {useState, useEffect} from "react"
 import ItemList from "./ItemList"
 import articulos from "../../mock/productos"
 import { useParams } from "react-router-dom"
+import {collection,getDocs,getFirestore} from 'firebase/firestore'
+
 
 
 const ItemListContainer = () => {
@@ -9,10 +11,26 @@ const ItemListContainer = () => {
   const [items, setItems] = useState([])
   const [loading,setLoading] = useState(false)
   const {categoria} = useParams()
-  
+  const [list,setList] = useState([]);
+
+ 
+const getProducts = async () => {
+
+  const db = getFirestore();
+  await getDocs(collection(db,'productos')).then((snapshot) => {
+    const dataExtraida = snapshot.docs.map((datos) => datos.data());
+    setList(dataExtraida)
+  });
+};
+
+// useEffect(()=>{
+//  getProducts();
+// },[])
+// }
 
   useEffect(() =>  {
 
+    getProducts()
     setLoading(true)
   const traerArticulos = new Promise((res,rej)=>{
       const articulosFiltrdados =articulos.filter(
